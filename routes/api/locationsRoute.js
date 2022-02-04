@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { LibraryCard, Reader } = require('../../models');
+const { Traveller, Location, Trip } = require('../../models');
 
 // GET all cards
 router.get('/', async (req, res) => {

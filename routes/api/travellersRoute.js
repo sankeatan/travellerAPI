@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Reader, Book, LibraryCard } = require('../../models');
+const { Traveller, Location, Trip } = require('../../models');
 
-// GET all readers
+// GET all travellers
 router.get('/', async (req, res) => {
   try {
-    const readerData = await Reader.findAll({
+    const travellerData = await Traveller.findAll({
       include: [{ model: LibraryCard }, { model: Book }],
       attributes: {
         include: [
