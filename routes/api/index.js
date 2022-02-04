@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const readerRoutes = require('./travellersRoute');
-const libraryCardRoutes = require('./locationsRoute');
+const travellerRoutes = require('./travellersRoute');
+const locationRoutes = require('./locationsRoute');
+const tripRoutes = require('./tripsRoute');
 
-router.use('/readers', readerRoutes);
-router.use('/cards', libraryCardRoutes);
+router.use('/traveller', travellerRoutes);
+router.use('/location', locationRoutes);
+router.use('/trip', tripRoutes);
 
 module.exports = router;
