@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Traveller, Location, Trip } = require('../../models');
 
-// GET all cards
+//GET ALL locations
 router.get('/', async (req, res) => {
   try {
     const locationsData = await Location.findAll({
@@ -13,15 +13,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET a single card
+// GET a single location by ID
 router.get('/:id', async (req, res) => {
   try {
-    const libraryCardData = await LibraryCard.findByPk(req.params.id, {
-      include: [{ model: Reader }],
+    const locationsData = await Location.findByPk(req.params.id, {
+      include: [{ model: Traveller, through: Trip, as: 'travellers' }],
     });
 
-    if (!libraryCardData) {
-      res.status(404).json({ message: 'No library card found with that id!' });
+    if (!locationsData) {
+      res.status(404).json({ message: 'No location found with that id!' });
       return;
     }
 
