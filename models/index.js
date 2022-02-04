@@ -7,12 +7,16 @@ Traveller.hasMany(Trip, {
   onDelete: 'CASCADE',
 });
 
-Trip.belongsTo(Traveller, {
-  foreignKey: 'reader_id',
+Trip.hasMany(Traveller, {
+  foreignKey: 'traveller_id',
 });
 
-LibraryCard.belongsTo(Reader, {
-  foreignKey: 'reader_id',
+Trip.hasMany(Location, {
+  foreignKey: 'location_id',
+})
+
+Location.belongsTo(Trip, {
+  foreignKey: 'location_id',
 });
 
 module.exports = { Reader, Book, LibraryCard };
