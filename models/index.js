@@ -15,7 +15,10 @@ Trip.hasMany(Location, {
   foreignKey: 'location_id',
 })
 
-Location.belongsTo(Trip, {
+Location.belongsToMany(Traveller, {
+  through: {
+    model: Trip
+  },
   foreignKey: 'location_id',
 });
 

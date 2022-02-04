@@ -6,7 +6,7 @@ const { Traveller, Location, Trip } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const travellerData = await Traveller.findAll({
-      include: [{ model: Trip }],
+      include: [{ model: Location, through: Trip, as: 'planned_trips' }],
     });
     res.status(200).json(travellerData);
   } catch (err) {
@@ -18,21 +18,11 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const travellerData = await Traveller.findByPk(req.params.id, {
-      include: [{ model: Trip }],
-      attributes: {
-        include: [
-          [
-            sequelize.literal(
-              '(SELECT location.name FROM location WHERE trip.location_id = location.id)'
-            ),
-            'location',
-          ],
-        ],
-      },
+      include: [{ model: Location, through: Trip, as: 'planned_trips' }],
     });
 
     if (!readerData) {
-      res.status(404).json({ message: 'No reader found with that id!' });
+      res.status(404).json({ message: 'No traveller found with that id!' });
       return;
     }
 

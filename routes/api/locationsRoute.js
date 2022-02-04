@@ -4,10 +4,10 @@ const { Traveller, Location, Trip } = require('../../models');
 // GET all cards
 router.get('/', async (req, res) => {
   try {
-    const libraryCardData = await LibraryCard.findAll({
-      include: [{ model: Reader }],
+    const locationsData = await Location.findAll({
+      include: [{ model: Traveller, through: Trip, as: 'travellers'}],
     });
-    res.status(200).json(libraryCardData);
+    res.status(200).json(locationsData);
   } catch (err) {
     res.status(500).json(err);
   }
